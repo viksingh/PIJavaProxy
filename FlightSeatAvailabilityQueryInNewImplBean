@@ -1,0 +1,33 @@
+package com.sap.xi.xi.demo.airline;
+
+import javax.ejb.Stateless;
+import javax.jws.WebService;
+import com.sap.engine.services.webservices.espbase.configuration.ann.dt.TransportGuaranteeDT;
+import com.sap.engine.services.webservices.espbase.configuration.ann.dt.TransportGuaranteeEnumsLevel;
+import com.sap.engine.services.webservices.espbase.configuration.ann.dt.AuthenticationDT;
+import com.sap.engine.services.webservices.espbase.configuration.ann.dt.AuthenticationEnumsAuthenticationLevel;
+import com.sap.engine.services.webservices.espbase.configuration.ann.dt.SessionHandlingDT;
+import com.sap.engine.services.webservices.espbase.configuration.ann.dt.RelMessagingNW05DTOperation;
+import com.sap.engine.services.webservices.espbase.configuration.ann.dt.XIEnabled;
+import com.sap.engine.services.webservices.espbase.configuration.ann.rt.TransportBindingRT;
+
+
+@SessionHandlingDT(enableSession = false)
+@AuthenticationDT(authenticationLevel = AuthenticationEnumsAuthenticationLevel.BASIC)
+@TransportGuaranteeDT(level = TransportGuaranteeEnumsLevel.NONE)
+@WebService(portName = "FlightSeatAvailabilityQuery_In_new_Port", serviceName = "FlightSeatAvailabilityQuery_In_new_Service", endpointInterface = "com.sap.xi.xi.demo.airline.FlightSeatAvailabilityQueryInNew", targetNamespace = "http://sap.com/xi/XI/Demo/Airline", wsdlLocation = "META-INF/wsdl/com/sap/xi/xi/demo/airline/FlightSeatAvailabilityQuery_In_new/FlightSeatAvailabilityQuery_In_new.wsdl")
+@Stateless
+
+@XIEnabled
+@TransportBindingRT(AltPath = "{http://sap.com/xi/XI/Demo/Airline}FlightSeatAvailabilityQuery_In_new")
+public class FlightSeatAvailabilityQueryInNewImplBean {
+
+	@RelMessagingNW05DTOperation(enableWSRM = false)
+	public  com.sap.xi.xi.demo.airline.FlightSeatAvailabilityResponse flightSeatAvailabilityQueryInNew(com.sap.xi.xi.demo.airline.FlightSeatAvailabilityQuery flightSeatAvailabilityQuery)throws com.sap.xi.xi.demo.airline.FlightNotFound_Exception {
+		FlightSeatAvailabilityResponse response = new FlightSeatAvailabilityResponse();
+		response.setBusinessFreeSeats(20);
+		response.setBusinessMaxSeats(200);
+		return response;
+		
+	 }
+}
